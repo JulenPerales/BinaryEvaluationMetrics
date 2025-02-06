@@ -27,7 +27,7 @@ Load the package and use the available functions:
 library(BinaryEvaluationMetrics)
 
 # Example usage of Clayton Skill Score
-actuals <- c(1, 0, 1, 0, 0, 1, 0, 1, 1, 0)
+actuals <- c(1, 0, 0, 0, 0, 1, 0, 1, 0, 0)
 predictions <- c(0.9, 0.7, 0.8, 0.65, 0.3, 0.2, 0.9, 0.4, 0.1, 0)
 
 css <- clayton_skill_score(predictions, actuals)
