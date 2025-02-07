@@ -35,6 +35,50 @@ plotClassifier(OA)
 CSI <- Classifier(predictions,actuals,metric="CSI")
 plotClassifier(CSI)
 
+#Example using spatial data (Spatraster)
+
+nrows <- 5
+ncols <- 5
+
+# Create an index raster with structured values (not random)
+predictions <- rast(nrows=nrows, ncols=ncols)
+values(predictions) <- seq(0.05, 1, length.out=ncell(index))
+
+# Create a boolean raster ensuring 30% prevalence (30% of cells = 1)
+actuals_values <- c(
+  0, 0, 0, 0, 0,
+  0, 1, 0, 1, 0,
+  0, 0, 0, 1, 0,
+  0, 1, 0, 0, 0,
+  1, 0, 0, 0, 0
+)
+actuals <- rast(nrows=nrows, ncols=ncols, ext=ext)
+values(actuals) <- actuals_values
+OA <- Classifier(predictions,actuals)
+plotClassifier(OA)
+CSI <- Classifier(predictions,actuals,metric="CSI")
+plotClassifier(CSI)
+
+#Example for a single-threshold classification
+predictions <- c(1, 1, 1, 1, 0, 0, 1, 0, 0, 0)
+actuals <- c(1, 0, 0, 0, 0, 1, 0, 1, 0, 0)
+
+Classification(predictions,actuals)
+
+#Example for a single-threshold classification with maps
+predictions_values <- c(
+  1, 0, 0, 0, 0,
+  0, 1, 0, 1, 0,
+  0, 0, 0, 1, 0,
+  1, 0, 1, 0, 0,
+  0, 0, 0, 0, 1
+)
+predictions <- rast(nrows=nrows, ncols=ncols, ext=ext)
+values(predictions) <- predictions_values
+actuals <- rast(nrows=nrows, ncols=ncols, ext=ext)
+values(actuals) <- actuals_values
+
+Classification(predictions,actuals)
 ```
 
 ## Contributing
